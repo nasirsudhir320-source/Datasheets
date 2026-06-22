@@ -1,0 +1,20 @@
+name: Auto-Update Equipment Portal
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**.pdf'
+      - '**.PDF'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Notify Portal
+        run: |
+          echo "New equipment data detected. Rebuilding index..."
+          # This triggers a cache refresh for your GitHub Pages site
+          curl -X PURGE https://nasirsudhir320-source.github.io/Datasheets/
